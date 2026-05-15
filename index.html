@@ -182,15 +182,14 @@
     <div class="pricing" id="buy">
         <h2 style="margin-bottom:2rem;" data-i18n="buy-title">CRAVESICK X1</h2>
         <div class="price-card">
-            <div class="price">$189 <small data-i18n="buy-usd">USD</small></div>
-            <p style="color:#aaa; margin:1rem 0;">¥899 / NT$6,100</p>
+            <div class="price" id="price-main">$189 <small id="price-currency" data-i18n="buy-usd">USD</small></div>
             <p style="color:#888; font-size:0.9rem;" data-i18n="buy-specs">12mm · 30g/pair · PAEK thermoplastic · Free shipping</p>
             <div class="region-buttons">
-                <a href="https://www.goofish.com/item?spm=a21ybx.personal.feeds.1.31dc6ac2TKHMEz&id=1050305608456&categoryId=125958001" class="region-btn cn" data-i18n="buy-cn">🇨🇳 中国 — ¥899</a>
-                <a href="mailto:cs@cravsick.com?subject=I'm%20interested%20in%20CRAVESICK%20X1%20(Taiwan)&body=Hi%2C%20I%20want%20to%20order%20CRAVESICK%20X1.%20Please%20send%20me%20the%20purchase%20information." class="region-btn tw" data-i18n="buy-tw">🇹🇼 台灣 — 聯絡我們</a>
-                <a href="mailto:cs@cravsick.com" class="region-btn intl" data-i18n="buy-intl">🌍 International — $189</a>
+                <a href="https://www.goofish.com/item?spm=a21ybx.personal.feeds.1.31dc6ac2TKHMEz&id=1050305608456&categoryId=125958001" class="region-btn cn" data-i18n="buy-cn" data-region="zh">🇨🇳 中国 — ¥899</a>
+                <a href="mailto:cs@cravsick.com?subject=I'm%20interested%20in%20CRAVESICK%20X1%20(Taiwan)&body=Hi%2C%20I%20want%20to%20order%20CRAVESICK%20X1.%20Please%20send%20me%20the%20purchase%20information." class="region-btn tw" data-i18n="buy-tw" data-region="tw">🇹🇼 台灣 — 聯絡我們</a>
+                <a href="mailto:cs@cravsick.com" class="region-btn intl" data-i18n="buy-intl" data-region="en">🌍 International — $189</a>
             </div>
-            <p style="color:#888; font-size:0.8rem; margin-top:0.5rem;" data-i18n="buy-note">Global shipping included. Contact: cs@cravsick.com</p>
+            <p style="color:#888; font-size:0.8rem; margin-top:0.5rem;" data-i18n="buy-note" id="buy-note">Global shipping included. Contact: cs@cravsick.com</p>
         </div>
     </div>
     
@@ -313,11 +312,13 @@ const langData = {
         "eu-p2": "CRAVESICK 為明天的法規而生。",
         "buy-title": "CRAVESICK X1",
         "buy-usd": "新台幣",
+        "price-main": "NT$6,100",
+        "price-currency": "TWD",
         "buy-specs": "12mm · 30g/對 · PAEK 熱塑 · 免運費",
         "buy-cn": "🇨🇳 中國 — ¥899",
         "buy-tw": "🇹🇼 台灣 — 聯絡我們",
         "buy-intl": "🌍 國際 — $189",
-        "buy-note": "全球免運。聯絡：cs@cravsick.com",
+        "buy-note": "僅限台灣地區購買。聯絡：cs@cravsick.com",
         "footer-brand": "PAEK 熱塑性碳纖維自行車零件"
     }
 };
@@ -334,6 +335,11 @@ function switchLang(lang) {
         if (data[key]) {
             el.innerHTML = data[key];
         }
+    });
+    
+    // Show only matching region buttons, hide others
+    document.querySelectorAll('[data-region]').forEach(el => {
+        el.style.display = el.getAttribute('data-region') === lang ? 'inline-block' : 'none';
     });
     
     // Update html lang attribute
