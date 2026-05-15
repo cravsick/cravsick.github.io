@@ -3,19 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRAVESICK X1 — PAEK Thermoplastic Carbon Thru Axle</title>
-    <meta name="description" content="CRAVESICK X1: The world's first PAEK thermoplastic carbon fiber thru axle. 30g, 100% recyclable, EU Circular Economy compliant. $189.">
+    <title data-i18n="title">CRAVESICK X1 — PAEK Thermoplastic Carbon Thru Axle</title>
+    <meta name="description" content="CRAVESICK X1: 30g PAEK thermoplastic carbon fiber thru axle. 100% recyclable.">
     
     <meta property="og:title" content="CRAVESICK X1 — PAEK Thermoplastic Carbon Thru Axle">
-    <meta property="og:description" content="30g. PAEK thermoplastic. 100% recyclable. $189.">
+    <meta property="og:description" content="30g. PAEK thermoplastic. 100% recyclable.">
     <meta property="og:type" content="product">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif;
             background: #0a0a0a; color: #f5f5f5; line-height: 1.6;
         }
+        
+        /* Language switcher */
+        .lang-bar {
+            position: fixed; top: 1rem; right: 1rem; z-index: 100;
+            display: flex; gap: 0.25rem; background: #1a1a2e;
+            padding: 0.3rem; border-radius: 8px; border: 1px solid #333;
+        }
+        .lang-bar button {
+            background: none; border: none; color: #666; cursor: pointer;
+            padding: 0.3rem 0.6rem; border-radius: 5px; font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        .lang-bar button:hover { color: #fff; }
+        .lang-bar button.active { background: #fff; color: #0a0a0a; font-weight: 600; }
         
         /* Hero */
         .hero {
@@ -70,10 +84,20 @@
         }
         .price-card {
             display: inline-block; background: #1a1a2e; padding: 3rem;
-            border-radius: 12px; border: 1px solid #333;
+            border-radius: 12px; border: 1px solid #333; max-width: 550px;
         }
         .price { font-size: 3rem; font-weight: 800; color: #fff; }
         .price small { font-size: 1rem; color: #888; }
+        .region-buttons { display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap; margin-top:1rem; }
+        .region-btn {
+            display:inline-block; padding:0.8rem 1.5rem; border-radius:8px;
+            text-decoration:none; font-weight:600; font-size:0.95rem;
+            transition: transform 0.2s;
+        }
+        .region-btn:hover { transform: scale(1.05); }
+        .region-btn.cn { background:#4ade80; color:#0a0a0a; }
+        .region-btn.tw { background:#f0abfc; color:#0a0a0a; }
+        .region-btn.intl { background:#fff; color:#0a0a0a; }
         
         /* Footer */
         footer {
@@ -81,58 +105,67 @@
             border-top: 1px solid #222;
         }
         footer a { color: #888; text-decoration: none; }
+        
+        .lang-hidden { display: none !important; }
     </style>
 </head>
 <body>
 
+    <!-- Language Switcher -->
+    <div class="lang-bar">
+        <button onclick="switchLang('en')" id="lang-en" class="active">EN</button>
+        <button onclick="switchLang('zh')" id="lang-zh">简</button>
+        <button onclick="switchLang('tw')" id="lang-tw">繁</button>
+    </div>
+
     <!-- Hero -->
     <div class="hero">
-        <h1>CRAVESICK X1<br>PAEK Thermoplastic Carbon Thru Axle</h1>
-        <p class="subtitle">Lighter. Stronger. Recyclable.</p>
+        <h1><span data-i18n="hero-title">CRAVESICK X1<br>PAEK Thermoplastic Carbon Thru Axle</span></h1>
+        <p class="subtitle" data-i18n="hero-sub">Lighter. Stronger. Recyclable.</p>
         <div class="product-img"><img src="images/product-hero.png" alt="CRAVESICK X1 PAEK Thermoplastic Carbon Thru Axle"></div>
-        <a href="#buy" class="cta">Buy — From ¥899 / $189</a>
-        <p style="color:#888; font-size:0.85rem;">Choose your region below</p>
+        <a href="#buy" class="cta" data-i18n="hero-cta">Buy — From $189</a>
+        <p style="color:#888; font-size:0.85rem; margin-top:0.5rem;" data-i18n="hero-hint">Select your region below</p>
     </div>
     
     <!-- Stats -->
     <div class="stats">
-        <div class="stat"><div class="value">30g</div><div class="label">per pair (12mm)</div></div>
-        <div class="stat"><div class="value">>1,050 kgf</div><div class="label">tensile strength</div></div>
-        <div class="stat"><div class="value">25 Nm</div><div class="label">torsion rated</div></div>
-        <div class="stat"><div class="value">100%</div><div class="label">recyclable</div></div>
+        <div class="stat"><div class="value">30g</div><div class="label" data-i18n="stat-weight">per pair (12mm)</div></div>
+        <div class="stat"><div class="value">&gt;1,050 kgf</div><div class="label" data-i18n="stat-tensile">tensile strength</div></div>
+        <div class="stat"><div class="value">25 Nm</div><div class="label" data-i18n="stat-torque">torsion rated</div></div>
+        <div class="stat"><div class="value">100%</div><div class="label" data-i18n="stat-recycle">recyclable</div></div>
     </div>
     
     <!-- Why PAEK -->
     <section>
-        <h2>Why PAEK Thermoplastic?</h2>
-        <p>Traditional carbon fiber uses epoxy resin — once cured, it's landfill forever. PAEK (PEEK/PEKK family) is different: it's a high-performance thermoplastic that can be re-melted and reformed. Lighter than aluminum, tougher than thermoset carbon, and fully recyclable.</p>
+        <h2 data-i18n="why-title">Why PAEK Thermoplastic?</h2>
+        <p data-i18n="why-p1">Traditional carbon fiber uses epoxy resin — once cured, it's landfill forever. PAEK is different: a high-performance thermoplastic that can be re-melted and reformed. Lighter than aluminum, tougher than thermoset carbon, and fully recyclable.</p>
         
         <div class="compare">
             <div class="compare-card">
-                <h3>Aluminum</h3>
+                <h3 data-i18n="comp-al-title">Aluminum</h3>
                 <ul>
-                    <li>40–60g / pair</li>
-                    <li>~570 MPa tensile</li>
-                    <li class="weak">Heavy</li>
-                    <li>Recyclable</li>
+                    <li><span data-i18n="comp-al-wt">40–60g / pair</span></li>
+                    <li><span data-i18n="comp-al-ts">~570 MPa tensile</span></li>
+                    <li class="weak" data-i18n="comp-al-heavy">Heavy</li>
+                    <li><span data-i18n="comp-al-recycle">Recyclable</span></li>
                 </ul>
             </div>
             <div class="compare-card">
-                <h3>Thermoset CF</h3>
+                <h3 data-i18n="comp-ts-title">Thermoset CF</h3>
                 <ul>
-                    <li>29–35g / pair</li>
-                    <li>800–1200 MPa</li>
-                    <li class="weak">Brittle failure</li>
-                    <li class="weak">Not recyclable</li>
+                    <li><span data-i18n="comp-ts-wt">29–35g / pair</span></li>
+                    <li><span data-i18n="comp-ts-ts">800–1200 MPa</span></li>
+                    <li class="weak" data-i18n="comp-ts-brittle">Brittle failure</li>
+                    <li class="weak" data-i18n="comp-ts-norecycle">Not recyclable</li>
                 </ul>
             </div>
             <div class="compare-card highlight">
-                <h3>PAEK (CRAVESICK)</h3>
+                <h3 data-i18n="comp-paek-title">PAEK (CRAVESICK)</h3>
                 <ul>
-                    <li>30g / pair</li>
-                    <li>>1,200 MPa</li>
-                    <li>Ductile failure</li>
-                    <li>100% recyclable</li>
+                    <li><span data-i18n="comp-paek-wt">30g / pair</span></li>
+                    <li><span data-i18n="comp-paek-ts">&gt;1,200 MPa</span></li>
+                    <li><span data-i18n="comp-paek-ductile">Ductile failure</span></li>
+                    <li><span data-i18n="comp-paek-recycle">100% recyclable</span></li>
                 </ul>
             </div>
         </div>
@@ -140,33 +173,183 @@
     
     <!-- EU Compliance -->
     <section>
-        <h2>EU Circular Economy Ready</h2>
-        <p>The EU Circular Economy Action Plan mandates recycled content in all vehicles — including bicycles — starting 2026. PAEK thermoplastic carbon fiber is the only thru axle technology that meets these requirements today.</p>
-        <p>CRAVESICK is built for the regulations of tomorrow, not the compromises of yesterday.</p>
+        <h2 data-i18n="eu-title">EU Circular Economy Ready</h2>
+        <p data-i18n="eu-p1">The EU Circular Economy Action Plan mandates recycled content in vehicles — including bicycles — starting 2026. PAEK thermoplastic carbon fiber is the only thru axle technology that meets these requirements today.</p>
+        <p data-i18n="eu-p2">CRAVESICK is built for the regulations of tomorrow.</p>
     </section>
     
     <!-- Buy -->
     <div class="pricing" id="buy">
-        <h2 style="margin-bottom:2rem;">CRAVESICK X1</h2>
+        <h2 style="margin-bottom:2rem;" data-i18n="buy-title">CRAVESICK X1</h2>
         <div class="price-card">
-            <div class="price">$189 <small>USD</small></div>
-            <p style="color:#aaa; margin:1rem 0;">¥899 CNY</p>
-            <p style="color:#888; font-size:0.9rem;">12mm standard · 30g/pair · PAEK thermoplastic · Free shipping</p>
-            <br>
-            <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-            <a href="https://www.goofish.com/item?spm=a21ybx.personal.feeds.1.31dc6ac2TKHMEz&amp;id=1050305608456&amp;categoryId=125958001" class="cta" style="background:#4ade80; color:#0a0a0a; min-width:200px;">🇨🇳 China — ¥899</a>
-            <a href="mailto:cs@cravsick.com" class="cta" style="background:#fff; color:#0a0a0a; min-width:200px;">🌍 International — $189</a>
+            <div class="price">$189 <small data-i18n="buy-usd">USD</small></div>
+            <p style="color:#aaa; margin:1rem 0;">¥899 / NT$6,100</p>
+            <p style="color:#888; font-size:0.9rem;" data-i18n="buy-specs">12mm · 30g/pair · PAEK thermoplastic · Free shipping</p>
+            <div class="region-buttons">
+                <a href="https://www.goofish.com/item?spm=a21ybx.personal.feeds.1.31dc6ac2TKHMEz&id=1050305608456&categoryId=125958001" class="region-btn cn" data-i18n="buy-cn">🇨🇳 中国 — ¥899</a>
+                <a href="mailto:cs@cravsick.com?subject=I'm%20interested%20in%20CRAVESICK%20X1%20(Taiwan)&body=Hi%2C%20I%20want%20to%20order%20CRAVESICK%20X1.%20Please%20send%20me%20the%20purchase%20information." class="region-btn tw" data-i18n="buy-tw">🇹🇼 台灣 — 聯絡我們</a>
+                <a href="mailto:cs@cravsick.com" class="region-btn intl" data-i18n="buy-intl">🌍 International — $189</a>
             </div>
-            <p style="color:#888; font-size:0.8rem; margin-top:0.5rem;">International includes global shipping + duties</p>
-            <p style="color:#555; margin-top:1rem; font-size:0.85rem;">Or contact us: cs@cravsick.com</p>
+            <p style="color:#888; font-size:0.8rem; margin-top:0.5rem;" data-i18n="buy-note">Global shipping included. Contact: cs@cravsick.com</p>
         </div>
     </div>
     
     <!-- Footer -->
     <footer>
-        <p>© 2026 CRAVESICK — PAEK Thermoplastic Carbon Fiber Components</p>
+        <p>© 2026 CRAVESICK — <span data-i18n="footer-brand">PAEK Thermoplastic Carbon Fiber Components</span></p>
         <p><a href="mailto:cs@cravsick.com">cs@cravsick.com</a></p>
     </footer>
 
+<script>
+// Translation data
+const langData = {
+    en: {
+        title: "CRAVESICK X1 — PAEK Thermoplastic Carbon Thru Axle",
+        "hero-title": "CRAVESICK X1<br>PAEK Thermoplastic Carbon Thru Axle",
+        "hero-sub": "Lighter. Stronger. Recyclable.",
+        "hero-cta": "Buy — From $189",
+        "hero-hint": "Select your region below",
+        "stat-weight": "per pair (12mm)",
+        "stat-tensile": "tensile strength",
+        "stat-torque": "torsion rated",
+        "stat-recycle": "recyclable",
+        "why-title": "Why PAEK Thermoplastic?",
+        "why-p1": "Traditional carbon fiber uses epoxy resin — once cured, it's landfill forever. PAEK is different: a high-performance thermoplastic that can be re-melted and reformed. Lighter than aluminum, tougher than thermoset carbon, and fully recyclable.",
+        "comp-al-title": "Aluminum",
+        "comp-al-wt": "40–60g / pair",
+        "comp-al-ts": "~570 MPa tensile",
+        "comp-al-heavy": "Heavy",
+        "comp-al-recycle": "Recyclable",
+        "comp-ts-title": "Thermoset CF",
+        "comp-ts-wt": "29–35g / pair",
+        "comp-ts-ts": "800–1200 MPa",
+        "comp-ts-brittle": "Brittle failure",
+        "comp-ts-norecycle": "Not recyclable",
+        "comp-paek-title": "PAEK (CRAVESICK)",
+        "comp-paek-wt": "30g / pair",
+        "comp-paek-ts": ">1,200 MPa",
+        "comp-paek-ductile": "Ductile failure",
+        "comp-paek-recycle": "100% recyclable",
+        "eu-title": "EU Circular Economy Ready",
+        "eu-p1": "The EU Circular Economy Action Plan mandates recycled content in vehicles — including bicycles — starting 2026. PAEK thermoplastic carbon fiber is the only thru axle technology that meets these requirements today.",
+        "eu-p2": "CRAVESICK is built for the regulations of tomorrow.",
+        "buy-title": "CRAVESICK X1",
+        "buy-usd": "USD",
+        "buy-specs": "12mm · 30g/pair · PAEK thermoplastic · Free shipping",
+        "buy-cn": "🇨🇳 China — ¥899",
+        "buy-tw": "🇹🇼 Taiwan — Contact Us",
+        "buy-intl": "🌍 International — $189",
+        "buy-note": "Global shipping included. Contact: cs@cravsick.com",
+        "footer-brand": "PAEK Thermoplastic Carbon Fiber Components"
+    },
+    zh: {
+        title: "CRAVESICK X1 — PAEK 热塑性碳纤维桶轴杆",
+        "hero-title": "CRAVESICK X1<br>PAEK 热塑性碳纤维桶轴杆",
+        "hero-sub": "更轻 · 更强 · 可回收",
+        "hero-cta": "立即购买 — 从 ¥899 起",
+        "hero-hint": "选择你的地区",
+        "stat-weight": "每对 (12mm)",
+        "stat-tensile": "极限拉伸强度",
+        "stat-torque": "额定扭矩",
+        "stat-recycle": "可回收",
+        "why-title": "为什么选择 PAEK 热塑性碳纤维？",
+        "why-p1": "传统碳纤维使用环氧树脂——固化后就无法再利用。PAEK 是一种高性能热塑性材料，可重新融熔重塑。比铝合金更轻，比热固性碳纤维更坚韧，而且完全可回收。",
+        "comp-al-title": "铝合金",
+        "comp-al-wt": "40–60g / 对",
+        "comp-al-ts": "~570 MPa 拉伸",
+        "comp-al-heavy": "偏重",
+        "comp-al-recycle": "可回收",
+        "comp-ts-title": "热固碳纤维",
+        "comp-ts-wt": "29–35g / 对",
+        "comp-ts-ts": "800–1200 MPa",
+        "comp-ts-brittle": "脆性断裂",
+        "comp-ts-norecycle": "不可回收",
+        "comp-paek-title": "PAEK（CRAVESICK）",
+        "comp-paek-wt": "30g / 对",
+        "comp-paek-ts": ">1,200 MPa",
+        "comp-paek-ductile": "韧性断裂",
+        "comp-paek-recycle": "100% 可回收",
+        "eu-title": "符合欧盟循环经济法规",
+        "eu-p1": "欧盟《循环经济法案》规定从2026年起，包括自行车在内的车辆必须使用一定比例的再生材料。PAEK 热塑性碳纤维是当前唯一满足此要求的桶轴杆技术。",
+        "eu-p2": "CRAVESICK 为明天的法规而生。",
+        "buy-title": "CRAVESICK X1",
+        "buy-usd": "人民币",
+        "buy-specs": "12mm · 30g/对 · PAEK 热塑 · 包邮",
+        "buy-cn": "🇨🇳 中国 — ¥899",
+        "buy-tw": "🇹🇼 台湾 — 联络我们",
+        "buy-intl": "🌍 国际 — $189",
+        "buy-note": "全球包邮。联络：cs@cravsick.com",
+        "footer-brand": "PAEK 热塑性碳纤维骑行部件"
+    },
+    tw: {
+        title: "CRAVESICK X1 — PAEK 熱塑性碳纖維桶軸桿",
+        "hero-title": "CRAVESICK X1<br>PAEK 熱塑性碳纖維桶軸桿",
+        "hero-sub": "更輕 · 更強 · 可回收",
+        "hero-cta": "立即購買 — 從 NT$6,100 起",
+        "hero-hint": "選擇你的地區",
+        "stat-weight": "每對 (12mm)",
+        "stat-tensile": "極限拉伸強度",
+        "stat-torque": "額定扭力",
+        "stat-recycle": "可回收",
+        "why-title": "為什麼選擇 PAEK 熱塑性碳纖維？",
+        "why-p1": "傳統碳纖維使用環氧樹脂——固化後就無法再利用。PAEK 是一種高性能熱塑性材料，可重新熔融重塑。比鋁合金更輕，比熱固性碳纖維更堅韌，而且完全可回收。",
+        "comp-al-title": "鋁合金",
+        "comp-al-wt": "40–60g / 對",
+        "comp-al-ts": "~570 MPa 拉伸",
+        "comp-al-heavy": "偏重",
+        "comp-al-recycle": "可回收",
+        "comp-ts-title": "熱固碳纖維",
+        "comp-ts-wt": "29–35g / 對",
+        "comp-ts-ts": "800–1200 MPa",
+        "comp-ts-brittle": "脆性斷裂",
+        "comp-ts-norecycle": "不可回收",
+        "comp-paek-title": "PAEK（CRAVESICK）",
+        "comp-paek-wt": "30g / 對",
+        "comp-paek-ts": ">1,200 MPa",
+        "comp-paek-ductile": "韌性斷裂",
+        "comp-paek-recycle": "100% 可回收",
+        "eu-title": "符合歐盟循環經濟法規",
+        "eu-p1": "歐盟《循環經濟法案》規定從2026年起，包括自行車在內的車輛必須使用一定比例的再生材料。PAEK 熱塑性碳纖維是目前唯一滿足此要求的桶軸桿技術。",
+        "eu-p2": "CRAVESICK 為明天的法規而生。",
+        "buy-title": "CRAVESICK X1",
+        "buy-usd": "新台幣",
+        "buy-specs": "12mm · 30g/對 · PAEK 熱塑 · 免運費",
+        "buy-cn": "🇨🇳 中國 — ¥899",
+        "buy-tw": "🇹🇼 台灣 — 聯絡我們",
+        "buy-intl": "🌍 國際 — $189",
+        "buy-note": "全球免運。聯絡：cs@cravsick.com",
+        "footer-brand": "PAEK 熱塑性碳纖維自行車零件"
+    }
+};
+
+function switchLang(lang) {
+    // Update active button
+    document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
+    document.getElementById('lang-' + lang).classList.add('active');
+    
+    // Update all i18n elements
+    const data = langData[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (data[key]) {
+            el.innerHTML = data[key];
+        }
+    });
+    
+    // Update html lang attribute
+    document.documentElement.lang = lang;
+    
+    // Store preference
+    localStorage.setItem('cravsick-lang', lang);
+}
+
+// Restore language preference on load
+window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('cravsick-lang');
+    if (saved && langData[saved]) {
+        switchLang(saved);
+    }
+});
+</script>
 </body>
 </html>
